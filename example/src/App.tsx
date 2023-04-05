@@ -1,18 +1,22 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-location-autocomplete';
+import { StyleSheet, View, TextInput } from 'react-native';
+import { getAddressSuggestions } from 'react-native-location-autocomplete';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [text, setText] = React.useState<string>('');
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
+    const request = async () => {
+      let result = await getAddressSuggestions(text);
+      console.log(result);
+    };
+    request();
+  }, [text]);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <TextInput style={styles.textInput} onChangeText={setText} value={text} />
     </View>
   );
 }
@@ -28,4 +32,5 @@ const styles = StyleSheet.create({
     height: 60,
     marginVertical: 20,
   },
+  textInput: { backgroundColor: 'red', width: 200 },
 });

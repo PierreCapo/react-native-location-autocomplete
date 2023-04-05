@@ -17,6 +17,6 @@ const LocationAutocomplete = NativeModules.LocationAutocomplete
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return LocationAutocomplete.multiply(a, b);
+export function getAddressSuggestions(text: string): Promise<number> {
+  return LocationAutocomplete.getAddressSuggestions(text);
 }
